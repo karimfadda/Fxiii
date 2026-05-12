@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forma XIII — Architecture & Interior Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400&family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--w:#fafaf8;--b:#0d0d0d;--g1:#f4f4f2;--g3:#d0cfc9;--g5:#8a8980;--g7:#3a3a38;--ac:#b8a98a;--s:'Cormorant Garamond',Georgia,serif;--n:'Inter',system-ui,sans-serif}
+html,body{height:100%}
+body{background:var(--w);color:var(--b);font-family:var(--n);font-weight:300;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 3.5rem;height:68px;background:rgba(250,250,248,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--g3)}
+.logo-btn{border:none;background:none;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:flex-start;line-height:1}
+.logo-text{font-family:'Tenor Sans','Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--b)}
+.logo-sub{font-family:var(--n);font-size:.4rem;letter-spacing:.38em;text-transform:uppercase;color:var(--b);margin-top:.22rem;opacity:.7}
+.nav-links{display:flex;gap:2.2rem;list-style:none;align-items:center}
+.nav-links button{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g7);cursor:pointer;border:none;background:none;font-family:var(--n);padding:.2rem 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
+.nav-links button:hover,.nav-links button.active{color:var(--b);border-color:var(--b)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;border:none;background:none;padding:6px}
+.burger span{display:block;width:22px;height:1px;background:var(--b);transition:transform .3s,opacity .3s}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:rgba(250,250,248,.98);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu button{font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--b);cursor:pointer;border:none;background:none;font-family:var(--s);font-weight:300}
+
+/* PAGES */
+.page{display:none;padding-top:68px;min-height:100vh}
+.page.active{display:block}
+
+/* CAROUSEL */
+.carousel{position:relative;height:calc(100vh - 68px);overflow:hidden;background:#1a1714}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.slide.active{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;display:block}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,13,13,.08),rgba(13,13,13,.6))}
+.slide-content{position:absolute;bottom:6rem;left:3.5rem;z-index:10;color:white}
+.slide-eyebrow{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:.8rem}
+.slide-title{font-family:var(--s);font-size:clamp(3rem,5.5vw,6rem);font-weight:300;line-height:1}
+.slide-title em{font-style:italic;opacity:.7}
+.carousel-dots{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;gap:.8rem;z-index:10}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);border:none;cursor:pointer;transition:background .3s,transform .3s}
+.dot.active{background:white;transform:scale(1.4)}
+.c-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--ac);width:0;z-index:10}
+.c-nav{position:absolute;bottom:2rem;right:3.5rem;display:flex;gap:.8rem;z-index:10}
+.c-btn{width:40px;height:40px;border:1px solid rgba(255,255,255,.4);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.c-btn:hover{background:rgba(255,255,255,.15)}
+.c-btn svg{width:16px;stroke:white;fill:none;stroke-width:1.5}
+
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--g3);border-bottom:1px solid var(--g3);padding:.85rem 0}
+.marquee-track{display:flex;gap:3.5rem;animation:mqr 26s linear infinite;white-space:nowrap}
+.mi{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g5);flex-shrink:0}
+.mdot{color:var(--ac)}
+@keyframes mqr{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.sec{padding:7rem 3.5rem}
+.sl{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem}
+.st{font-family:var(--s);font-size:clamp(2rem,3.5vw,4rem);font-weight:300;line-height:1.1;margin-top:.4rem}
+.st em{font-style:italic;color:var(--g5)}
+
+/* HOME ABOUT */
+.home-about{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;border-top:1px solid var(--g3)}
+.about-body{font-size:.85rem;line-height:2.1;color:var(--g7);max-width:44ch;margin-top:1.5rem}
+.cta-btn{display:inline-flex;align-items:center;gap:1rem;margin-top:2rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--b);border:none;background:none;cursor:pointer;font-family:var(--n);transition:gap .3s}
+.cta-btn:hover{gap:1.6rem}
+.cta-line{width:36px;height:1px;background:var(--b);display:inline-block}
+
+/* OPTION C PILLARS */
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.pillar{padding:2.2rem 2rem;border-top:1px solid var(--g3)}
+.pillar:nth-child(odd){border-right:1px solid var(--g3)}
+.pillar-label{font-size:.54rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ac);margin-bottom:.6rem}
+.pillar-value{font-family:var(--s);font-size:1.6rem;font-weight:300;color:var(--b);line-height:1.2}
+.pillar-value em{font-style:italic;color:var(--g5)}
+
+/* FEATURED STRIPS — white */
+.feat-strip{background:var(--w);color:var(--b);display:grid;grid-template-columns:1fr 1fr;min-height:58vh;margin-bottom:2px;border-bottom:1px solid var(--g3)}
+.feat-img{overflow:hidden}
+.feat-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s ease}
+.feat-img:hover img{transform:scale(1.05)}
+.feat-txt{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.feat-tag{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:1.5rem}
+.feat-title{font-family:var(--s);font-size:clamp(1.8rem,3vw,3.2rem);font-weight:300;line-height:1.1;margin-bottom:1.2rem;color:var(--b)}
+.feat-title em{font-style:italic;color:var(--g5)}
+.feat-desc{font-size:.78rem;line-height:2;color:var(--g7);max-width:36ch;margin-bottom:2.5rem}
+.sbtn{display:inline-flex;align-items:center;gap:1rem;background:var(--ac);color:#0d0d0d;border:none;padding:.9rem 2rem;font-family:var(--n);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:gap .3s,opacity .3s;font-weight:400;width:fit-content}
+.sbtn:hover{gap:1.6rem;opacity:.85}
+
+/* HOME CONTACT */
+.home-contact{background:var(--b);color:var(--w);padding:7rem 3.5rem}
+.hc-form-inner{max-width:780px;margin:0 auto}
+.hc-tag{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:1.2rem}
+.hc-title{font-family:var(--s);font-size:clamp(2rem,3vw,3.5rem);font-weight:300;line-height:1.1;color:var(--w);margin-bottom:.8rem}
+.hc-title em{font-style:italic;color:var(--g3)}
+.hc-desc{font-size:.76rem;line-height:1.9;color:rgba(250,250,248,.45);max-width:48ch;margin-bottom:1.5rem}
+.hc-info{display:flex;gap:3rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.hc-row{display:flex;gap:.8rem;align-items:baseline}
+.hc-lbl{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.hc-val{font-size:.75rem;color:var(--g3)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.fl{display:block;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.4rem;margin-top:1rem}
+.fi{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.4);color:var(--w);padding:.55rem 0;font-family:var(--n);font-size:.78rem;font-weight:300;outline:none;transition:border-color .3s}
+.fi:focus{border-bottom-color:var(--ac)}
+.fi::placeholder{color:rgba(255,255,255,.22)}
+.fta{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.35);color:var(--w);padding:.8rem 1rem;font-family:var(--n);font-size:.78rem;font-weight:300;outline:none;transition:border-color .3s;resize:vertical;min-height:90px;margin-top:1rem;display:block}
+.fta:focus{border-color:var(--ac)}
+.fta::placeholder{color:rgba(255,255,255,.25)}
+
+/* PROJECTS */
+.proj-sec{padding:7rem 3.5rem;border-top:1px solid var(--g3)}
+.proj-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem}
+.proj-count{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--g5)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.pc{cursor:pointer}
+.pt{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--g3)}
+.pt img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.pc:hover .pt img{transform:scale(1.06)}
+.pov{position:absolute;inset:0;background:rgba(13,13,13,0);transition:background .4s;display:flex;align-items:flex-end;padding:1.2rem}
+.pc:hover .pov{background:rgba(13,13,13,.28)}
+.pvw{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:white;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+.pc:hover .pvw{opacity:1;transform:translateY(0)}
+.pm{margin-top:.9rem}
+.pn{font-family:var(--s);font-size:1.1rem;font-weight:400;color:var(--b)}
+.psub{font-size:.6rem;color:var(--g5);margin-top:.15rem}
+
+/* PAGE HERO */
+.page-hero{height:42vh;display:flex;align-items:flex-end;padding:0 3.5rem 4rem;position:relative;overflow:hidden;background:#1a1714}
+.ph-bg{position:absolute;inset:0}
+.ph-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.ph-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,13,13,.1),rgba(13,13,13,.72))}
+.ph-content{position:relative;z-index:2;color:white}
+.ph-eyebrow{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:.6rem}
+.ph-title{font-family:var(--s);font-size:clamp(2.5rem,5vw,5rem);font-weight:300;line-height:1}
+.ph-title em{font-style:italic;opacity:.75}
+
+/* ABOUT PAGE */
+.about-hero{position:relative;height:85vh;overflow:hidden;background:#1a1714}
+.about-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.about-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,13,13,.1) 0%,rgba(13,13,13,.68) 100%)}
+.about-hero-content{position:absolute;bottom:5rem;left:3.5rem;right:3.5rem;color:white;max-width:760px}
+.about-hero-eyebrow{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:1rem}
+.about-hero-title{font-family:var(--s);font-size:clamp(2.8rem,5vw,5.5rem);font-weight:300;line-height:1.05}
+.about-hero-title em{font-style:italic;opacity:.75}
+
+.about-quote{background:var(--b);color:var(--w);padding:6rem 3.5rem;display:flex;align-items:center;justify-content:center}
+.about-quote-inner{max-width:820px;text-align:center}
+.about-quote-text{font-family:var(--s);font-size:clamp(1.6rem,2.8vw,2.8rem);font-weight:300;line-height:1.4;font-style:italic;color:var(--w)}
+.about-quote-text em{font-style:normal;color:var(--ac)}
+.about-quote-attr{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:2rem}
+
+.about-philosophy{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--g3)}
+.ap-left{padding:7rem 5rem 7rem 3.5rem;border-right:1px solid var(--g3)}
+.ap-right{padding:7rem 3.5rem 7rem 5rem}
+.ap-body{font-size:.85rem;line-height:2.1;color:var(--g7);margin-top:1.5rem}
+
+.about-values{background:var(--g1);border-top:1px solid var(--g3);padding:7rem 3.5rem}
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--g3);border:1px solid var(--g3);margin-top:3rem}
+.val{background:var(--g1);padding:2.8rem 2.2rem;transition:background .3s}
+.val:hover{background:var(--w)}
+.val-n{font-family:var(--s);font-size:2.5rem;font-weight:300;color:var(--g3);line-height:1;margin-bottom:1rem}
+.val-t{font-family:var(--s);font-size:1.1rem;font-weight:400;margin-bottom:.5rem}
+.val-d{font-size:.73rem;line-height:1.9;color:var(--g5)}
+
+/* CONTACT PAGE */
+.contact-wrap{background:var(--b);color:var(--w);display:grid;grid-template-columns:1fr 1fr;gap:6rem;padding:7rem 3.5rem;min-height:calc(100vh - 68px)}
+.c-st{font-family:var(--s);font-size:clamp(2rem,3.5vw,4rem);font-weight:300;line-height:1.1;color:var(--w);margin-top:.4rem;margin-bottom:1.2rem}
+.c-st em{font-style:italic;color:var(--g3)}
+.c-body{font-size:.8rem;line-height:2;color:rgba(250,250,248,.5);max-width:36ch;margin-bottom:2rem}
+.ci-lbl{font-size:.54rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.25rem;margin-top:1.2rem}
+.ci-val{font-size:.82rem;color:var(--g3)}
+.cp .fi{border-bottom-color:rgba(255,255,255,.35)}
+.cp .fta{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.05)}
+
+/* LIGHTBOX */
+.lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(13,13,13,.96);align-items:center;justify-content:center;flex-direction:column}
+.lb.open{display:flex}
+.lb-inner{position:relative;width:90%;max-width:1000px}
+.lb-img{width:100%;max-height:70vh;object-fit:contain;display:block}
+.lb-close{position:absolute;top:-2.5rem;right:0;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);cursor:pointer;border:none;background:none;font-family:var(--n);transition:color .2s}
+.lb-close:hover{color:white}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(255,255,255,.25);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.lb-prev{left:-52px}.lb-next{right:-52px}
+.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.1)}
+.lb-prev svg,.lb-next svg{width:16px;stroke:white;fill:none;stroke-width:1.5}
+.lb-info{margin-top:1rem;text-align:center}
+.lb-name-el{font-family:var(--s);font-size:1.1rem;color:rgba(255,255,255,.6)}
+.lb-counter-el{font-size:.58rem;letter-spacing:.15em;color:rgba(255,255,255,.3);margin-top:.3rem}
+.lb-thumbs{display:flex;gap:.5rem;margin-top:.8rem;justify-content:center;overflow-x:auto;max-width:90vw}
+.lb-thumb{width:58px;height:42px;object-fit:cover;opacity:.4;cursor:pointer;transition:opacity .2s;flex-shrink:0;border:1px solid transparent}
+.lb-thumb.active{opacity:1;border-color:var(--ac)}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8rem 3.5rem;display:flex;justify-content:space-between;align-items:center}
+.f-logo-txt{font-family:'Tenor Sans','Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.f-logo-sub{font-family:var(--n);font-size:.38rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:.2rem}
+.f-copy{font-size:.58rem;color:rgba(255,255,255,.2)}
+.f-links{display:flex;gap:2rem;list-style:none}
+.f-links a{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);transition:color .2s;text-decoration:none}
+.f-links a:hover{color:rgba(255,255,255,.7)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:820px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .burger{display:flex}
+  .sec,.proj-sec,.contact-wrap,.home-contact,.about-values{padding:4rem 1.5rem}
+  .home-about,.feat-strip,.about-philosophy{grid-template-columns:1fr}
+  .feat-txt{padding:3rem 1.5rem}
+  .feat-strip{direction:ltr!important}
+  .pgrid{grid-template-columns:1fr 1fr}
+  .val-grid{grid-template-columns:1fr}
+  .slide-content{left:1.5rem;bottom:4rem}
+  .lb-prev{left:-4px}.lb-next{right:-4px}
+  .hc-info{flex-direction:column;gap:1rem}
+  .about-hero-content{left:1.5rem;right:1.5rem;bottom:3rem}
+  .ap-left{padding:4rem 1.5rem;border-right:none;border-bottom:1px solid var(--g3)}
+  .ap-right{padding:4rem 1.5rem}
+  footer{flex-direction:column;gap:1rem;text-align:center}
+}
+@media(max-width:480px){
+  .pgrid{grid-template-columns:1fr}
+  .fg2{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .pillar:nth-child(odd){border-right:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <button class="logo-btn" onclick="goTo('home')">
+    <div class="logo-text">FORMA XIII</div>
+    <span class="logo-sub">F-XIII</span>
+  </button>
+  <ul class="nav-links">
+    <li><button onclick="goTo('home')" id="nav-home" class="active">Home</button></li>
+    <li><button onclick="goTo('about')" id="nav-about">About Us</button></li>
+    <li><button onclick="goTo('interior')" id="nav-interior">Interior Design</button></li>
+    <li><button onclick="goTo('architecture')" id="nav-architecture">Architecture</button></li>
+    <li><button onclick="goTo('contact')" id="nav-contact">Contact Us</button></li>
+  </ul>
+  <button class="burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <button onclick="goTo('home');toggleMenu()">Home</button>
+  <button onclick="goTo('about');toggleMenu()">About Us</button>
+  <button onclick="goTo('interior');toggleMenu()">Interior Design</button>
+  <button onclick="goTo('architecture');toggleMenu()">Architecture</button>
+  <button onclick="goTo('contact');toggleMenu()">Contact Us</button>
+</div>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="carousel">
+    <div class="slide active"><img src="https://lh3.googleusercontent.com/d/1BonTSBKzSPOYqA9RSMyCsF7pS4XTprHv" alt=""><div class="slide-overlay"></div></div>
+    <div class="slide"><img src="https://lh3.googleusercontent.com/d/1vbnnaxcp8z_z0AGthAGJc_BarHjgzLY7" alt=""><div class="slide-overlay"></div></div>
+    <div class="slide"><img src="https://lh3.googleusercontent.com/d/1ICf0W7tZl_lKgecotkXi3xJSeA9KpvBg" alt=""><div class="slide-overlay"></div></div>
+    <div class="slide"><img src="https://lh3.googleusercontent.com/d/1Yw0sVsbm5jqQivKE4twNNVCn5EsOQv2c" alt=""><div class="slide-overlay"></div></div>
+    <div class="slide"><img src="https://lh3.googleusercontent.com/d/1TFO_Ajv0gT3Q4Mxzx_PsSQIEENSmYF-v" alt=""><div class="slide-overlay"></div></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow" id="slide-label">Interior Design</div>
+      <h1 class="slide-title">Space<br>as <em>Art,</em><br>Form<br>as <em>Life.</em></h1>
+    </div>
+    <div class="carousel-dots" id="carousel-dots"></div>
+    <div class="c-nav">
+      <button class="c-btn" onclick="prevSlide()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="c-btn" onclick="nextSlide()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+    <div class="c-progress" id="c-progress"></div>
+  </div>
+
+  <div class="marquee-wrap"><div class="marquee-track">
+    <span class="mi">Architecture</span><span class="mi mdot">&#9679;</span><span class="mi">Interior Design</span><span class="mi mdot">&#9679;</span><span class="mi">Residential</span><span class="mi mdot">&#9679;</span><span class="mi">Commercial</span><span class="mi mdot">&#9679;</span><span class="mi">Cairo</span><span class="mi mdot">&#9679;</span><span class="mi">Dubai</span><span class="mi mdot">&#9679;</span><span class="mi">Beirut</span><span class="mi mdot">&#9679;</span><span class="mi">Riyadh</span><span class="mi mdot">&#9679;</span><span class="mi">Architecture</span><span class="mi mdot">&#9679;</span><span class="mi">Interior Design</span><span class="mi mdot">&#9679;</span><span class="mi">Residential</span><span class="mi mdot">&#9679;</span><span class="mi">Commercial</span><span class="mi mdot">&#9679;</span><span class="mi">Cairo</span><span class="mi mdot">&#9679;</span><span class="mi">Dubai</span><span class="mi mdot">&#9679;</span><span class="mi">Beirut</span><span class="mi mdot">&#9679;</span><span class="mi">Riyadh</span><span class="mi mdot">&#9679;</span>
+  </div></div>
+
+  <div class="sec home-about reveal">
+    <div>
+      <p class="sl">About the Studio</p>
+      <h2 class="st">Driven by <em>precision,</em><br>shaped by silence.</h2>
+      <p class="about-body">A space is never merely a room. It is the architecture of a life — a quiet argument about what we value, how we move, what we choose to keep near. At Forma XIII, we believe that the finest design does not announce itself; it simply makes everything feel inevitable. We work slowly, with intention, stripping away the unnecessary until only truth remains.</p>
+      <button class="cta-btn" onclick="goTo('about')"><span class="cta-line"></span>Our Story</button>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><div class="pillar-label">Founded</div><div class="pillar-value">Est. <em>2020</em></div></div>
+      <div class="pillar"><div class="pillar-label">Studios</div><div class="pillar-value">Cairo <em>&</em> Dubai</div></div>
+      <div class="pillar"><div class="pillar-label">Typology</div><div class="pillar-value">Residential <em>&</em> Commercial</div></div>
+      <div class="pillar"><div class="pillar-label">Discipline</div><div class="pillar-value">Architecture <em>&</em> Interiors</div></div>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid var(--g3)">
+    <div style="padding:5rem 3.5rem 2rem"><p class="sl">Selected Work</p><h2 class="st">Recent <em>Projects.</em></h2></div>
+    <div class="feat-strip reveal">
+      <div class="feat-img"><img src="https://lh3.googleusercontent.com/d/18nhRi0HkGsNPznCBWIxtl9DzavO7gPbl" alt="Interior Design"></div>
+      <div class="feat-txt">
+        <p class="feat-tag">Interior Design</p>
+        <h3 class="feat-title">Spaces<br>that <em>hold</em><br>memory.</h3>
+        <p class="feat-desc">Ten residential and commercial interiors — each a deeply personal collaboration between studio and client, material and light.</p>
+        <button class="sbtn" onclick="goTo('interior')">Explore Interiors &#8594;</button>
+      </div>
+    </div>
+    <div class="feat-strip reveal" style="direction:rtl">
+      <div class="feat-img" style="direction:ltr"><img src="https://lh3.googleusercontent.com/d/1NtLwE85r6SmXd8aNt9F-4IjOjTYdv48e" alt="Architecture"></div>
+      <div class="feat-txt" style="direction:ltr">
+        <p class="feat-tag">Architecture</p>
+        <h3 class="feat-title">Buildings<br>as <em>structural</em><br>poems.</h3>
+        <p class="feat-desc">Architecture projects defined by restraint, proportion, and a deep respect for site and context.</p>
+        <button class="sbtn" onclick="goTo('architecture')">Explore Architecture &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-contact reveal">
+    <div class="hc-form-inner">
+      <p class="hc-tag">Get in Touch</p>
+      <h2 class="hc-title">Start a <em>Conversation.</em></h2>
+      <p class="hc-desc">Every project begins with listening. Tell us about your vision and we will tell you how we can bring it into being.</p>
+      <div class="hc-info">
+        <div class="hc-row"><span class="hc-lbl">Cairo</span><span class="hc-val">90 Street, New Cairo, Egypt</span></div>
+        <div class="hc-row"><span class="hc-lbl">Email</span><span class="hc-val">hello@formaxiii.com</span></div>
+      </div>
+      <div class="fg2">
+        <div><label class="fl">First Name</label><input class="fi" type="text" placeholder="Your first name"></div>
+        <div><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Your last name"></div>
+      </div>
+      <label class="fl">Email Address</label><input class="fi" type="email" placeholder="your@email.com">
+      <label class="fl">Project Type</label><input class="fi" type="text" placeholder="Residential / Architecture / Commercial">
+      <label class="fl">Tell Us About Your Project</label>
+      <textarea class="fta" placeholder="Describe your vision, location, scale, timeline&#8230;"></textarea>
+      <button class="sbtn" style="margin-top:1.4rem">Send Enquiry &#8594;</button>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="f-logo-txt">FORMA XIII</div><div class="f-logo-sub">F-XIII</div></div>
+    <p class="f-copy">&#169; 2025 Forma XIII. All rights reserved.</p>
+    <ul class="f-links">
+      <li><a href="https://www.instagram.com/formaxiii_studio?igsh=MWJoYnI0dW4zdnllaA==" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- INTERIOR -->
+<div class="page" id="page-interior">
+  <div class="page-hero"><div class="ph-bg"><img src="https://lh3.googleusercontent.com/d/1TFO_Ajv0gT3Q4Mxzx_PsSQIEENSmYF-v" alt=""></div><div class="ph-ov"></div><div class="ph-content"><div class="ph-eyebrow">Portfolio</div><h1 class="ph-title">Interior <em>Design.</em></h1></div></div>
+  <div class="proj-sec">
+    <div class="proj-hdr"><div><p class="sl">Residential</p><h2 class="st">Living <em>Spaces.</em></h2></div><span class="proj-count">10 Projects</span></div>
+    <p style="font-size:.8rem;line-height:1.9;color:var(--g7);max-width:54ch;margin-bottom:2rem">Each residential interior is a deeply personal collaboration — we listen first, then translate a way of living into spatial poetry.</p>
+    <div class="pgrid" id="grid-res"></div>
+  </div>
+  <div class="proj-sec" style="background:var(--g1)">
+    <div class="proj-hdr"><div><p class="sl">Commercial</p><h2 class="st">Commercial <em>Spaces.</em></h2></div><span class="proj-count">5 Projects</span></div>
+    <div class="pgrid" id="grid-com"></div>
+  </div>
+  <footer>
+    <div><div class="f-logo-txt">FORMA XIII</div><div class="f-logo-sub">F-XIII</div></div>
+    <p class="f-copy">&#169; 2025 Forma XIII. All rights reserved.</p>
+    <ul class="f-links"><li><a href="https://www.instagram.com/formaxiii_studio?igsh=MWJoYnI0dW4zdnllaA==" target="_blank" rel="noopener">Instagram</a></li><li><a href="#">Privacy</a></li></ul>
+  </footer>
+</div>
+
+<!-- ARCHITECTURE -->
+<div class="page" id="page-architecture">
+  <div class="page-hero"><div class="ph-bg"><img src="https://lh3.googleusercontent.com/d/1vbnnaxcp8z_z0AGthAGJc_BarHjgzLY7" alt=""></div><div class="ph-ov"></div><div class="ph-content"><div class="ph-eyebrow">Portfolio</div><h1 class="ph-title"><em>Architecture.</em></h1></div></div>
+  <div class="proj-sec">
+    <div class="proj-hdr"><div><p class="sl">Built Work</p><h2 class="st">Structural <em>Poetry.</em></h2></div><span class="proj-count">6 Projects</span></div>
+    <p style="font-size:.8rem;line-height:1.9;color:var(--g7);max-width:54ch;margin-bottom:2rem">From concept to completion — buildings defined by restraint, proportion, and a deep respect for site, climate, and context.</p>
+    <div class="pgrid" id="grid-arch"></div>
+  </div>
+  <footer>
+    <div><div class="f-logo-txt">FORMA XIII</div><div class="f-logo-sub">F-XIII</div></div>
+    <p class="f-copy">&#169; 2025 Forma XIII. All rights reserved.</p>
+    <ul class="f-links"><li><a href="https://www.instagram.com/formaxiii_studio?igsh=MWJoYnI0dW4zdnllaA==" target="_blank" rel="noopener">Instagram</a></li><li><a href="#">Privacy</a></li></ul>
+  </footer>
+</div>
+
+<!-- ABOUT — fully redesigned -->
+<div class="page" id="page-about">
+
+  <div class="about-hero">
+    <!-- Using confirmed-working architecture image -->
+    <img src="https://lh3.googleusercontent.com/d/1F43O3aZ-L5Tegr1VU383VH7mFbwpHiR7" alt="Forma XIII">
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-content">
+      <div class="about-hero-eyebrow">Est. 2020 — Cairo</div>
+      <!-- NEW HEADLINE — philosophical, about form -->
+      <h1 class="about-hero-title">Form is not<br>what a thing <em>looks like.</em><br>It is what a thing<br><em>asks of you.</em></h1>
+    </div>
+  </div>
+
+  <div class="about-quote">
+    <div class="about-quote-inner">
+      <div class="about-quote-text">&#8220;The finest spaces are not made. They are <em>revealed</em> — stripped of everything that does not belong, until what remains could not have been otherwise.&#8221;</div>
+      <div class="about-quote-attr">Forma XIII — Studio Principle</div>
+    </div>
+  </div>
+
+  <div class="about-philosophy reveal">
+    <div class="ap-left">
+      <p class="sl">Our Belief</p>
+      <h2 class="st">Space is not<br>a container.<br>It is a <em>condition.</em></h2>
+      <p class="ap-body">We began Forma XIII with a single provocation: that most designed spaces ask nothing of the people who inhabit them. They are comfortable, competent, and completely forgettable. We wanted to make the opposite — spaces that change how you feel the moment you cross the threshold. Spaces that ask something of you in return.<br><br>This is not a philosophy of difficulty. It is a philosophy of depth. We believe that a room, like a poem, should reward attention. That the light at four in the afternoon should be different from the light at nine in the morning, and that both should be considered. That the temperature of a stone under the palm of a hand is as important as the floor plan.<br><br>We work slowly. We take fewer projects than we are offered. And we give every one of them the same thing we would want given to us: our complete and undivided attention.</p>
+    </div>
+    <div class="ap-right">
+      <p class="sl">Our Practice</p>
+      <h2 class="st">We listen<br>before we<br><em>draw.</em></h2>
+      <p class="ap-body">Forma XIII was founded in Cairo in 2020, at a moment when the world had paused and space itself had become a subject of urgent conversation. We asked: what does it mean to be at home? What does a room owe the person inside it?<br><br>Our studio operates across architecture and interior design, residential and commercial, with work in Cairo, the Gulf, and the Levant. We are small by intention — eight people who have chosen depth over scale, and who believe that the relationship between a studio and its clients is one of the most intimate collaborations a person can enter into.<br><br>Every project begins with a long conversation. We visit the site alone, before we bring drawings. We try to understand not just what a client wants to build, but what they want to feel. Then, and only then, do we begin.</p>
+    </div>
+  </div>
+
+  <div class="about-values reveal">
+    <p class="sl">What We Stand For</p>
+    <h2 class="st">Our <em>Values.</em></h2>
+    <div class="val-grid">
+      <div class="val"><div class="val-n">01</div><div class="val-t">Precision</div><p class="val-d">Every decision is deliberate. We work slowly, thoroughly, and without compromise on what matters.</p></div>
+      <div class="val"><div class="val-n">02</div><div class="val-t">Honesty</div><p class="val-d">We use materials for what they are — never to simulate something they are not.</p></div>
+      <div class="val"><div class="val-n">03</div><div class="val-t">Permanence</div><p class="val-d">We design for decades, not seasons. Our spaces are meant to deepen with time.</p></div>
+      <div class="val"><div class="val-n">04</div><div class="val-t">Listening</div><p class="val-d">The client's life is the brief. We spend more time understanding than designing.</p></div>
+      <div class="val"><div class="val-n">05</div><div class="val-t">Silence</div><p class="val-d">We believe restraint is the highest form of design intelligence. Silence is a material too.</p></div>
+      <div class="val"><div class="val-n">06</div><div class="val-t">Craft</div><p class="val-d">We work only with makers who share our standards, ensuring every detail is resolved in the making.</p></div>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="f-logo-txt">FORMA XIII</div><div class="f-logo-sub">F-XIII</div></div>
+    <p class="f-copy">&#169; 2025 Forma XIII. All rights reserved.</p>
+    <ul class="f-links"><li><a href="https://www.instagram.com/formaxiii_studio?igsh=MWJoYnI0dW4zdnllaA==" target="_blank" rel="noopener">Instagram</a></li><li><a href="#">Privacy</a></li></ul>
+  </footer>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div class="contact-wrap cp">
+    <div>
+      <p class="sl" style="color:var(--ac)">Get in Touch</p>
+      <h1 class="c-st">Start a<br><em>Conversation.</em></h1>
+      <p class="c-body">Every project begins with a conversation. Tell us about your vision and we will tell you how we can bring it into being.</p>
+      <div class="ci-lbl">Studio — Cairo</div><div class="ci-val">90 Street, New Cairo, Egypt</div>
+      <div class="ci-lbl">Email</div><div class="ci-val">hello@formaxiii.com</div>
+      <div class="ci-lbl">Phone</div><div class="ci-val">+20 2 1234 5678</div>
+    </div>
+    <div>
+      <div class="fg2">
+        <div><label class="fl">First Name</label><input class="fi" type="text" placeholder="Alessandro"></div>
+        <div><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Rossi"></div>
+      </div>
+      <label class="fl">Email</label><input class="fi" type="email" placeholder="hello@yourdomain.com">
+      <label class="fl">Project Type</label><input class="fi" type="text" placeholder="Residential / Architecture / Commercial">
+      <label class="fl">Budget Range</label><input class="fi" type="text" placeholder="e.g. k &#8211; M">
+      <label class="fl">Your Vision</label>
+      <textarea class="fta" placeholder="Tell us about your project &#8212; location, scale, timeline&#8230;"></textarea>
+      <button class="sbtn" style="margin-top:1.4rem">Send Enquiry &#8594;</button>
+    </div>
+  </div>
+  <footer>
+    <div><div class="f-logo-txt">FORMA XIII</div><div class="f-logo-sub">F-XIII</div></div>
+    <p class="f-copy">&#169; 2025 Forma XIII. All rights reserved.</p>
+    <ul class="f-links"><li><a href="https://www.instagram.com/formaxiii_studio?igsh=MWJoYnI0dW4zdnllaA==" target="_blank" rel="noopener">Instagram</a></li><li><a href="#">Privacy</a></li></ul>
+  </footer>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="closeLb()">Close &#10005;</button>
+    <img class="lb-img" id="lb-img" src="" alt="">
+    <button class="lb-prev" onclick="lbNav(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button class="lb-next" onclick="lbNav(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="lb-info">
+    <div class="lb-name-el" id="lb-name"></div>
+    <div class="lb-counter-el" id="lb-counter"></div>
+    <div class="lb-thumbs" id="lb-thumbs"></div>
+  </div>
+</div>
+
+<script>
+var GD = function(id){ return 'https://lh3.googleusercontent.com/d/' + id; };
+var LABELS = ['Interior Design','Architecture','Architecture','Interior Residential','Interior Residential'];
+
+var RES = [
+  {name:'The Ivory House',sub:'Cairo, Egypt · 2022',images:['1Yw0sVsbm5jqQivKE4twNNVCn5EsOQv2c','180Lhob117UbWPYUEWqoT4Y0GtNmqtxuj','1hYVjpXfJFMhQX1bScg7G90wkkrWdPW1x','1wFgr_He2jVXgiCk6HCJeTceRtdqO6peg','1HDIM83WdfphiUyX1PfZRw2ngZbtj9hmt']},
+  {name:'Casa Dorada',sub:'Cairo, Egypt · 2023',images:['1xNpFpCe1TjNsZmtWSfc8a4W9UU74hw46','1c8-ikJVBjz0zu6JxmRq-w3e9goj0O68P','1zoanOnjKdersAriTFpjwA0kFlQX9GwGL','1BonTSBKzSPOYqA9RSMyCsF7pS4XTprHv','11jc4tphwCD42Sja4rq2QIH9j1P4ewmvF']},
+  {name:'The Linen Apartment',sub:'Dubai, UAE · 2021',images:['1hzU6qrnRXItpWaJlh6BtZowyLZEmq-FD','1p2BVKlDEiz3PkrcaGrvrAJcYBnMw6B5h','17riRzD20NBGdud-NXY83LDrC8pwmxQpO','18G-0GXEisheYOtsD6a-r4s1ax6qut9TS','1RO1oAUN4RgEOsamHmOnCibQWXFP6ka-v']},
+  {name:'Maison Sable',sub:'Cairo, Egypt · 2023',images:['1Xc9i1I2BnZ0Pm1Lth45DYyYGNuURPv3u','1ScqzqkYS1G9XTOnXf9jT0-hQOUY59x8x','1qOo78UBtQjH4xpQqWF-f5_IpghSajHwH','19rmRTqnqL1YbdZ6H-OQ8ZF8PzskvAS3W','1D-pGJB79Ktazg1r8a9AGNyP1pOuspzrB']},
+  {name:'The Stone Garden',sub:'Cairo, Egypt · 2022',images:['1TFO_Ajv0gT3Q4Mxzx_PsSQIEENSmYF-v','1ZcrJuFvGoPNvT-FBXoIFvzRc1XBqih3X','16TIL48YizDVcAYCOLiY7_iN4fkqErWIG','12Cb5g7_s89h9AKwnYV6qTwFZGjWsRGI6','1HRdruUBA7Of_zp8dfU_vrYIApfshf2NN']},
+  {name:'Dusk House',sub:'New Cairo, Egypt · 2021',images:['19MN3TGthuVMLYn_gN_6mgWV6pRfgPmNy','1DhmcaRteezR7lp7uyC8-24fTQ_1VMaPA','1pJSQKms75ljsPZ0Xihpkn-hKnGdjXA4j','193ROtwo9FZuk5UEjkzB0SjVKS3DX-AoF','1fwRqinMT65ikDkE6ZnQuw9-_vAxuBbQE']},
+  {name:'Apartment No. 7',sub:'Beirut, Lebanon · 2020',images:['1kqiNQwiDVw40emwPBWJF80a68H-nSUWu','1MNnPShuCuKQe0vnK31ikZLsLioGBUns1','1QSqAlzrE-jsQqfTfRe-56iKCqwCQr761','1Q-aaudbujbZDZps3Fv92fCm5CA9C79HH','1kfHt2CfeKKTBnLPAIfYEkGHDQZXZj-Eb']},
+  {name:'The Brass Residence',sub:'Dubai, UAE · 2023',images:['124w5neHu5T4ISE4VPGmKSO62VYjDWoFP','16Blb7PdDEtao-kuWM2CqUfy07u3GSTjw','19sttXwXnyCYwPIJcIw3vQ1iaPGgqZ4qc','1HMcYYjjz7NeLwWBNS0AVXRs26clO-hZ0','1hS_kuuotHZfYy0urNy7eYU3huxcPoIWA']},
+  {name:'Villa Nour',sub:'Cairo, Egypt · 2024',images:['1jGhKrrzPbBzxpWIaEErk5QLMmsjaIU2a','1XEmjLTJ4oCD8lxkAPqOTu7np3vnEv1PB','1J8u-phSNiORzgRY-MR4CUJ8u3hdIGIVC','1TkNRGhWd9JI3l3gV01EEjpvct5hcxoZJ','1qIAmICbqTMMbUNsM2Prmv13oaUVsCitt']},
+  {name:'The White Diwan',sub:'New Cairo, Egypt · 2022',images:['1FrF1o414KY0RKdUUlmTecG6j4goh4i4i','1uvtKYeEsdyfZa9nhS8kcgmJ86Vr6FT6-','19Mpc9OyOnEkHzOLi8P2KzmH63-HCcwSP','1bhq5O_Dgfihibh3bsNvHA3mNehbgL_vm','1SvfHZLX3CK20f6JzmpdkhhwJn19bb7r4']}
+];
+var COM = [
+  {name:'Atelier Blanc',sub:'Cairo, Egypt · 2023',images:['1_VVrxRVSs4g4jfRkxbK-AauRiQGtz_QW','18nhRi0HkGsNPznCBWIxtl9DzavO7gPbl','1coY5CSZ4zdt-Z1nj37RbZrsp0ZXWARHv','10GpLvRZbQP73amzU3THjtXSGbmRgTh3s','1yTjU-eedlCXJHMEtzuULdgo12m-CjdDH']},
+  {name:'The Merchant Office',sub:'Beirut, Lebanon · 2021',images:['13dD4L1qjIFRcDVD_PK6eWEes8k73vBMN','1g79jWWgqESogdq_JM8rOkP7J13FjPTVH','1EQFH7z0aPJFPKl1_DwXL3SdA_NVkDJgL','1baQinwnAhnPnAe5VuundT9ZeEIJ47a7s','1UsOBQgPzL77juOXYrFba0iQ4nCnzK0gC']},
+  {name:'Salon Dore',sub:'Cairo, Egypt · 2022',images:['1s5om7Qg1_UgAGBdZQZelGJHyV2kYQplK','1SYRuxmquRv8m2lPDMcsVHmPHozFtw_iu','1Vo-REfX7BuZLO6qnhCr-HG8-Shrm3GuC','1EW0-CNwc4utwsrMt_f-eNcNbTPoSvZpm','1Eu_XaiCzGe-_nQ4pazkHCHTOIZVEXsnp']},
+  {name:'Studio Kohl',sub:'Dubai, UAE · 2023',images:['145US3SGTFwqb4J_qH0uLovnKvwrNIPmT','1GX4EzU8c1HA8G2YYljuqvt6WiP_HxEbR','1seBvD0tQ9LQNWpuTXfjZiAF1Isp1T5vP','1npQgTI-lud51tYoD1LPaDIapNVST1wk2','1HBd4lbm4NDIX-LtYktwZ328eTlRNBrz8']},
+  {name:'The Pale Library',sub:'New Cairo, Egypt · 2024',images:['1XMYcEZvKs9zzq4RO-JbBPYiVs_kuDfwi','18bnp6VS9IhzTIynOijXeh-d7wupMyotU','10QpAz1iV-ZDGYJm1as6j-INs-GUxsONf','1NAxpxHafZ3cr0G4GrxMa1hPNQ_8MVQWe','16WWjyjJmVFQ6yy2oTrP0QaYbNzj4lAug']}
+];
+var ARCH = [
+  {name:'The Threshold Tower',sub:'Cairo, Egypt · 2023',images:['1vbnnaxcp8z_z0AGthAGJc_BarHjgzLY7','1F43O3aZ-L5Tegr1VU383VH7mFbwpHiR7','1mH2HfTXfzQ35Z6drRyAqo6CnrktD0wy-','15FyLiR189aIQc7lR0_qI58iuRKu6dIvE','1sBUPU8PedeWdVN-oLKodqgKiAHu9S3dj']},
+  {name:'House of Horizons',sub:'Dubai, UAE · 2022',images:['14tvDK9_g-oBpHXnaV_XCx3o-3L-MqbM_','13HGzdoyVtkMoxSmEp-Edmdw8TAYzzNp7','1gZVwHIWbgW1zOS3iYqnogsWj_srUq-A0','15AJXXLBSEl9NKyFwp_l3k2t_3F9TEV8b','1nzTwsgG7CgoPx1ugXrwIkfxtROdXC7Sg']},
+  {name:'The Cliff Pavilion',sub:'Cairo, Egypt · 2023',images:['1ICf0W7tZl_lKgecotkXi3xJSeA9KpvBg','1RWH7ciIVnUtejrhA4ReRvqIRNTO3jaD6','1-9OZUYBzr5gK2fRFxwjeyLFwJ5eZap0Z','1A_NyvX3j12n68OrrvWdCCBXKOSRNuTLm','142mzc5cXTEBiDuVgF5cBSIIfLFneFWtJ']},
+  {name:'Desert Gate',sub:'Cairo, Egypt · 2024',images:['1k3bvgTuNxFstZchxwKgEB6haZ9Uhp3Be','17FKb8f_corgzjmqZBroJA2GPEHLtnBD2','1V7t-hseWsCIAvIFV_tv-1Xt2-1sbAM2p','10mZmnjjuJr-d8I9_Gl7uEhvn0TAiyEdD','1NDMaktrPJahsXwKr7Dk_im5NfMcKoDKk']},
+  {name:'The Archive',sub:'Beirut, Lebanon · 2021',images:['1XKtsw9ehEnQnxIxT7vs3TGwmF1lFrXEC','1IS-Lslk7Fo-A7QSLH_UiH5WOyO_de6Fe','1uzNEU2FemvkxayyBLcFs0QrCKrl_gI06','1-ssbVEoUzWUyLevCRa75ce15DlfnyI1g','1Z5dniCCjjhm8GLk_Sbnqv0w2n2FvQfgp']},
+  {name:'Pavilion of Quiet',sub:'Cairo, Egypt · 2022',images:['1iEhZFT8PHSalo1Hml93DFWGv7CHrUEkb','1Yfj6mG0AQsoj299Pi9EP53Z5CYQt4RrI','1R3KTmIURLWPI1yIqff8Gczyys6ui3V9h','1vafFTgXM8dEXY_fNnG5eQFwVi2rhDxY3','10QD49vCn5HnuY8DK6VhJrfQzeZApusK1']}
+];
+
+function buildGrid(id, data) {
+  var g = document.getElementById(id);
+  if (!g) return;
+  var html = '';
+  for (var i = 0; i < data.length; i++) {
+    var p = data[i];
+    html += '<div class="pc" data-idx="' + i + '">' +
+      '<div class="pt"><img src="' + GD(p.images[0]) + '" alt="' + p.name + '" loading="lazy"><div class="pov"><span class="pvw">View Project &#8594;</span></div></div>' +
+      '<div class="pm"><div class="pn">' + p.name + '</div><div class="psub">' + p.sub + '</div></div>' +
+      '</div>';
+  }
+  g.innerHTML = html;
+  var cards = g.querySelectorAll('.pc');
+  for (var j = 0; j < cards.length; j++) {
+    (function(proj){ cards[j].addEventListener('click', function(){ openLb(proj); }); })(data[j]);
+  }
+}
+
+var slideIdx = 0;
+var allSlides = document.querySelectorAll('.slide');
+var DURATION = 5000;
+var progStart = null;
+
+function buildDots() {
+  var el = document.getElementById('carousel-dots');
+  var html = '';
+  for (var i = 0; i < allSlides.length; i++) {
+    html += '<button class="dot' + (i===0?' active':'') + '"></button>';
+  }
+  el.innerHTML = html;
+  var dots = el.querySelectorAll('.dot');
+  for (var j = 0; j < dots.length; j++) {
+    (function(n){ dots[j].addEventListener('click', function(){ goSlide(n); }); })(j);
+  }
+}
+
+function goSlide(n) {
+  allSlides[slideIdx].classList.remove('active');
+  var dots = document.querySelectorAll('.dot');
+  if (dots[slideIdx]) dots[slideIdx].classList.remove('active');
+  slideIdx = (n + allSlides.length) % allSlides.length;
+  allSlides[slideIdx].classList.add('active');
+  if (dots[slideIdx]) dots[slideIdx].classList.add('active');
+  var lbl = document.getElementById('slide-label');
+  if (lbl) lbl.textContent = LABELS[slideIdx] || '';
+  progStart = null;
+  var bar = document.getElementById('c-progress');
+  if (bar) bar.style.width = '0%';
+}
+function nextSlide(){ goSlide(slideIdx + 1); }
+function prevSlide(){ goSlide(slideIdx - 1); }
+
+function tickProg(ts) {
+  if (!progStart) progStart = ts;
+  var pct = Math.min(((ts - progStart) / DURATION) * 100, 100);
+  var bar = document.getElementById('c-progress');
+  if (bar) bar.style.width = pct + '%';
+  if (pct >= 100) { nextSlide(); progStart = ts; }
+  requestAnimationFrame(tickProg);
+}
+
+var lbProj = null, lbIdx = 0;
+function openLb(proj) { lbProj = proj; lbIdx = 0; renderLb(); document.getElementById('lb').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeLb() { document.getElementById('lb').classList.remove('open'); document.body.style.overflow = ''; }
+function renderLb() {
+  document.getElementById('lb-img').src = GD(lbProj.images[lbIdx]);
+  document.getElementById('lb-name').textContent = lbProj.name + ' \u2014 ' + lbProj.sub;
+  document.getElementById('lb-counter').textContent = (lbIdx+1) + ' / ' + lbProj.images.length;
+  var th = document.getElementById('lb-thumbs');
+  var html = '';
+  for (var i = 0; i < lbProj.images.length; i++) {
+    html += '<img src="' + GD(lbProj.images[i]) + '" class="lb-thumb' + (i===lbIdx?' active':'') + '" loading="lazy">';
+  }
+  th.innerHTML = html;
+  var imgs = th.querySelectorAll('.lb-thumb');
+  for (var j = 0; j < imgs.length; j++) {
+    (function(n){ imgs[j].addEventListener('click', function(){ lbIdx=n; renderLb(); }); })(j);
+  }
+}
+function lbNav(dir) { lbIdx = (lbIdx + dir + lbProj.images.length) % lbProj.images.length; renderLb(); }
+document.getElementById('lb').addEventListener('click', function(e){ if(e.target===this) closeLb(); });
+document.addEventListener('keydown', function(e){
+  if (!document.getElementById('lb').classList.contains('open')) return;
+  if (e.key==='Escape') closeLb();
+  if (e.key==='ArrowRight') lbNav(1);
+  if (e.key==='ArrowLeft') lbNav(-1);
+});
+
+function goTo(name) {
+  var pages = document.querySelectorAll('.page');
+  var btns = document.querySelectorAll('.nav-links button');
+  for (var i=0;i<pages.length;i++) pages[i].classList.remove('active');
+  for (var j=0;j<btns.length;j++) btns[j].classList.remove('active');
+  var pg = document.getElementById('page-'+name);
+  var btn = document.getElementById('nav-'+name);
+  if (pg) pg.classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0,0);
+  setTimeout(initReveal,60);
+}
+
+function toggleMenu() {
+  var b = document.getElementById('burger');
+  var m = document.getElementById('mobile-menu');
+  b.classList.toggle('open');
+  m.classList.toggle('open');
+}
+
+function initReveal() {
+  var els = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries){
+    for (var i=0;i<entries.length;i++){
+      if(entries[i].isIntersecting){ entries[i].target.classList.add('vis'); obs.unobserve(entries[i].target); }
+    }
+  },{threshold:0.07});
+  for (var j=0;j<els.length;j++){ if(!els[j].classList.contains('vis')) obs.observe(els[j]); }
+}
+
+buildDots();
+buildGrid('grid-res', RES);
+buildGrid('grid-com', COM);
+buildGrid('grid-arch', ARCH);
+requestAnimationFrame(tickProg);
+initReveal();
+</script>
+</body>
+</html>
