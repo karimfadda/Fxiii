@@ -10,8 +10,6 @@
 :root{--w:#fafaf8;--b:#0d0d0d;--g1:#f4f4f2;--g3:#d0cfc9;--g5:#8a8980;--g7:#3a3a38;--ac:#b8a98a;--s:'Cormorant Garamond',Georgia,serif;--n:'Inter',system-ui,sans-serif}
 html,body{height:100%}
 body{background:var(--w);color:var(--b);font-family:var(--n);font-weight:300;overflow-x:hidden}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 3.5rem;height:68px;background:rgba(250,250,248,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--g3)}
 .logo-btn{border:none;background:none;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:flex-start;line-height:1}
 .logo-text{font-family:'Tenor Sans','Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--b)}
@@ -27,12 +25,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:rgba(250,250,248,.98);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
 .mobile-menu.open{display:flex}
 .mobile-menu button{font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--b);cursor:pointer;border:none;background:none;font-family:var(--s);font-weight:300}
-
-/* PAGES */
 .page{display:none;padding-top:68px;min-height:100vh}
 .page.active{display:block}
-
-/* CAROUSEL */
 .carousel{position:relative;height:calc(100vh - 68px);overflow:hidden;background:#1a1714}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
 .slide.active{opacity:1}
@@ -50,28 +44,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .c-btn{width:40px;height:40px;border:1px solid rgba(255,255,255,.4);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
 .c-btn:hover{background:rgba(255,255,255,.15)}
 .c-btn svg{width:16px;stroke:white;fill:none;stroke-width:1.5}
-
-/* MARQUEE */
 .marquee-wrap{overflow:hidden;border-top:1px solid var(--g3);border-bottom:1px solid var(--g3);padding:.85rem 0}
 .marquee-track{display:flex;gap:3.5rem;animation:mqr 26s linear infinite;white-space:nowrap}
 .mi{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--g5);flex-shrink:0}
 .mdot{color:var(--ac)}
 @keyframes mqr{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* SECTIONS */
 .sec{padding:7rem 3.5rem}
 .sl{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:.7rem}
 .st{font-family:var(--s);font-size:clamp(2rem,3.5vw,4rem);font-weight:300;line-height:1.1;margin-top:.4rem}
 .st em{font-style:italic;color:var(--g5)}
-
-/* HOME ABOUT */
 .home-about{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;border-top:1px solid var(--g3)}
 .about-body{font-size:.85rem;line-height:2.1;color:var(--g7);max-width:44ch;margin-top:1.5rem}
 .cta-btn{display:inline-flex;align-items:center;gap:1rem;margin-top:2rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--b);border:none;background:none;cursor:pointer;font-family:var(--n);transition:gap .3s}
 .cta-btn:hover{gap:1.6rem}
 .cta-line{width:36px;height:1px;background:var(--b);display:inline-block}
-
-/* OPTION C PILLARS */
 .pillars{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .pillar{padding:2.2rem 2rem;border-top:1px solid var(--g3)}
 .pillar:nth-child(odd){border-right:1px solid var(--g3)}
@@ -79,8 +65,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .pillar-value{font-family:var(--s);font-size:1.6rem;font-weight:300;color:var(--b);line-height:1.2}
 .pillar-value em{font-style:italic;color:var(--g5)}
 
-/* FEATURED STRIPS — white */
-.feat-strip{background:var(--w);color:var(--b);display:grid;grid-template-columns:1fr 1fr;min-height:58vh;margin-bottom:2px;border-bottom:1px solid var(--g3)}
+/* FEATURED STRIPS — no borders between them */
+.feat-strip{background:var(--w);color:var(--b);display:grid;grid-template-columns:1fr 1fr;min-height:58vh;margin-bottom:0}
 .feat-img{overflow:hidden}
 .feat-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s ease}
 .feat-img:hover img{transform:scale(1.05)}
@@ -92,7 +78,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .sbtn{display:inline-flex;align-items:center;gap:1rem;background:var(--ac);color:#0d0d0d;border:none;padding:.9rem 2rem;font-family:var(--n);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:gap .3s,opacity .3s;font-weight:400;width:fit-content}
 .sbtn:hover{gap:1.6rem;opacity:.85}
 
-/* HOME CONTACT */
+/* selected work wrapper — no top/bottom border */
+.work-wrap{padding-top:0}
+.work-header{padding:5rem 3.5rem 2rem}
+
 .home-contact{background:var(--b);color:var(--w);padding:7rem 3.5rem}
 .hc-form-inner{max-width:780px;margin:0 auto}
 .hc-tag{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:1.2rem}
@@ -111,8 +100,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .fta{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.35);color:var(--w);padding:.8rem 1rem;font-family:var(--n);font-size:.78rem;font-weight:300;outline:none;transition:border-color .3s;resize:vertical;min-height:90px;margin-top:1rem;display:block}
 .fta:focus{border-color:var(--ac)}
 .fta::placeholder{color:rgba(255,255,255,.25)}
-
-/* PROJECTS */
 .proj-sec{padding:7rem 3.5rem;border-top:1px solid var(--g3)}
 .proj-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem}
 .proj-count{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--g5)}
@@ -128,8 +115,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .pm{margin-top:.9rem}
 .pn{font-family:var(--s);font-size:1.1rem;font-weight:400;color:var(--b)}
 .psub{font-size:.6rem;color:var(--g5);margin-top:.15rem}
-
-/* PAGE HERO */
 .page-hero{height:42vh;display:flex;align-items:flex-end;padding:0 3.5rem 4rem;position:relative;overflow:hidden;background:#1a1714}
 .ph-bg{position:absolute;inset:0}
 .ph-bg img{width:100%;height:100%;object-fit:cover;display:block}
@@ -138,8 +123,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .ph-eyebrow{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:.6rem}
 .ph-title{font-family:var(--s);font-size:clamp(2.5rem,5vw,5rem);font-weight:300;line-height:1}
 .ph-title em{font-style:italic;opacity:.75}
-
-/* ABOUT PAGE */
 .about-hero{position:relative;height:85vh;overflow:hidden;background:#1a1714}
 .about-hero img{width:100%;height:100%;object-fit:cover;display:block}
 .about-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,13,13,.1) 0%,rgba(13,13,13,.68) 100%)}
@@ -147,18 +130,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .about-hero-eyebrow{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ac);margin-bottom:1rem}
 .about-hero-title{font-family:var(--s);font-size:clamp(2.8rem,5vw,5.5rem);font-weight:300;line-height:1.05}
 .about-hero-title em{font-style:italic;opacity:.75}
-
 .about-quote{background:var(--b);color:var(--w);padding:6rem 3.5rem;display:flex;align-items:center;justify-content:center}
 .about-quote-inner{max-width:820px;text-align:center}
 .about-quote-text{font-family:var(--s);font-size:clamp(1.6rem,2.8vw,2.8rem);font-weight:300;line-height:1.4;font-style:italic;color:var(--w)}
 .about-quote-text em{font-style:normal;color:var(--ac)}
 .about-quote-attr{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:2rem}
-
 .about-philosophy{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--g3)}
 .ap-left{padding:7rem 5rem 7rem 3.5rem;border-right:1px solid var(--g3)}
 .ap-right{padding:7rem 3.5rem 7rem 5rem}
 .ap-body{font-size:.85rem;line-height:2.1;color:var(--g7);margin-top:1.5rem}
-
 .about-values{background:var(--g1);border-top:1px solid var(--g3);padding:7rem 3.5rem}
 .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--g3);border:1px solid var(--g3);margin-top:3rem}
 .val{background:var(--g1);padding:2.8rem 2.2rem;transition:background .3s}
@@ -166,8 +146,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .val-n{font-family:var(--s);font-size:2.5rem;font-weight:300;color:var(--g3);line-height:1;margin-bottom:1rem}
 .val-t{font-family:var(--s);font-size:1.1rem;font-weight:400;margin-bottom:.5rem}
 .val-d{font-size:.73rem;line-height:1.9;color:var(--g5)}
-
-/* CONTACT PAGE */
 .contact-wrap{background:var(--b);color:var(--w);display:grid;grid-template-columns:1fr 1fr;gap:6rem;padding:7rem 3.5rem;min-height:calc(100vh - 68px)}
 .c-st{font-family:var(--s);font-size:clamp(2rem,3.5vw,4rem);font-weight:300;line-height:1.1;color:var(--w);margin-top:.4rem;margin-bottom:1.2rem}
 .c-st em{font-style:italic;color:var(--g3)}
@@ -176,8 +154,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .ci-val{font-size:.82rem;color:var(--g3)}
 .cp .fi{border-bottom-color:rgba(255,255,255,.35)}
 .cp .fta{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.05)}
-
-/* LIGHTBOX */
 .lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(13,13,13,.96);align-items:center;justify-content:center;flex-direction:column}
 .lb.open{display:flex}
 .lb-inner{position:relative;width:90%;max-width:1000px}
@@ -194,8 +170,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .lb-thumbs{display:flex;gap:.5rem;margin-top:.8rem;justify-content:center;overflow-x:auto;max-width:90vw}
 .lb-thumb{width:58px;height:42px;object-fit:cover;opacity:.4;cursor:pointer;transition:opacity .2s;flex-shrink:0;border:1px solid transparent}
 .lb-thumb.active{opacity:1;border-color:var(--ac)}
-
-/* FOOTER */
 footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8rem 3.5rem;display:flex;justify-content:space-between;align-items:center}
 .f-logo-txt{font-family:'Tenor Sans','Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.35)}
 .f-logo-sub{font-family:var(--n);font-size:.38rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:.2rem}
@@ -203,35 +177,22 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8
 .f-links{display:flex;gap:2rem;list-style:none}
 .f-links a{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);transition:color .2s;text-decoration:none}
 .f-links a:hover{color:rgba(255,255,255,.7)}
-
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94)}
 .reveal.vis{opacity:1;transform:translateY(0)}
-
 @media(max-width:820px){
-  nav{padding:0 1.5rem}
-  .nav-links{display:none}
-  .burger{display:flex}
+  nav{padding:0 1.5rem}.nav-links{display:none}.burger{display:flex}
   .sec,.proj-sec,.contact-wrap,.home-contact,.about-values{padding:4rem 1.5rem}
   .home-about,.feat-strip,.about-philosophy{grid-template-columns:1fr}
-  .feat-txt{padding:3rem 1.5rem}
-  .feat-strip{direction:ltr!important}
-  .pgrid{grid-template-columns:1fr 1fr}
-  .val-grid{grid-template-columns:1fr}
-  .slide-content{left:1.5rem;bottom:4rem}
-  .lb-prev{left:-4px}.lb-next{right:-4px}
+  .feat-txt{padding:3rem 1.5rem}.feat-strip{direction:ltr!important}
+  .pgrid{grid-template-columns:1fr 1fr}.val-grid{grid-template-columns:1fr}
+  .slide-content{left:1.5rem;bottom:4rem}.lb-prev{left:-4px}.lb-next{right:-4px}
   .hc-info{flex-direction:column;gap:1rem}
   .about-hero-content{left:1.5rem;right:1.5rem;bottom:3rem}
-  .ap-left{padding:4rem 1.5rem;border-right:none;border-bottom:1px solid var(--g3)}
-  .ap-right{padding:4rem 1.5rem}
+  .ap-left{padding:4rem 1.5rem;border-right:none;border-bottom:1px solid var(--g3)}.ap-right{padding:4rem 1.5rem}
   footer{flex-direction:column;gap:1rem;text-align:center}
+  .work-header{padding:3rem 1.5rem 1.5rem}
 }
-@media(max-width:480px){
-  .pgrid{grid-template-columns:1fr}
-  .fg2{grid-template-columns:1fr}
-  .pillars{grid-template-columns:1fr}
-  .pillar:nth-child(odd){border-right:none}
-}
+@media(max-width:480px){.pgrid{grid-template-columns:1fr}.fg2{grid-template-columns:1fr}.pillars{grid-template-columns:1fr}.pillar:nth-child(odd){border-right:none}}
 </style>
 </head>
 <body>
@@ -300,8 +261,9 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8
     </div>
   </div>
 
-  <div style="border-top:1px solid var(--g3)">
-    <div style="padding:5rem 3.5rem 2rem"><p class="sl">Selected Work</p><h2 class="st">Recent <em>Projects.</em></h2></div>
+  <!-- FEATURED STRIPS — no border wrapper -->
+  <div class="work-wrap">
+    <div class="work-header"><p class="sl">Selected Work</p><h2 class="st">Recent <em>Projects.</em></h2></div>
     <div class="feat-strip reveal">
       <div class="feat-img"><img src="https://lh3.googleusercontent.com/d/18nhRi0HkGsNPznCBWIxtl9DzavO7gPbl" alt="Interior Design"></div>
       <div class="feat-txt">
@@ -322,6 +284,7 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8
     </div>
   </div>
 
+  <!-- HOME CONTACT — mailto linked -->
   <div class="home-contact reveal">
     <div class="hc-form-inner">
       <p class="hc-tag">Get in Touch</p>
@@ -329,17 +292,17 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8
       <p class="hc-desc">Every project begins with listening. Tell us about your vision and we will tell you how we can bring it into being.</p>
       <div class="hc-info">
         <div class="hc-row"><span class="hc-lbl">Cairo</span><span class="hc-val">90 Street, New Cairo, Egypt</span></div>
-        <div class="hc-row"><span class="hc-lbl">Email</span><span class="hc-val">hello@formaxiii.com</span></div>
+        <div class="hc-row"><span class="hc-lbl">Email</span><span class="hc-val">info@forma-xiii.com</span></div>
       </div>
       <div class="fg2">
-        <div><label class="fl">First Name</label><input class="fi" type="text" placeholder="Your first name"></div>
-        <div><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Your last name"></div>
+        <div><label class="fl">First Name</label><input class="fi" type="text" id="hc-fn" placeholder="Your first name"></div>
+        <div><label class="fl">Last Name</label><input class="fi" type="text" id="hc-ln" placeholder="Your last name"></div>
       </div>
-      <label class="fl">Email Address</label><input class="fi" type="email" placeholder="your@email.com">
-      <label class="fl">Project Type</label><input class="fi" type="text" placeholder="Residential / Architecture / Commercial">
+      <label class="fl">Email Address</label><input class="fi" type="email" id="hc-email" placeholder="your@email.com">
+      <label class="fl">Project Type</label><input class="fi" type="text" id="hc-type" placeholder="Residential / Architecture / Commercial">
       <label class="fl">Tell Us About Your Project</label>
-      <textarea class="fta" placeholder="Describe your vision, location, scale, timeline&#8230;"></textarea>
-      <button class="sbtn" style="margin-top:1.4rem">Send Enquiry &#8594;</button>
+      <textarea class="fta" id="hc-msg" placeholder="Describe your vision, location, scale, timeline&#8230;"></textarea>
+      <button class="sbtn" style="margin-top:1.4rem" onclick="sendEnquiry('hc')">Send Enquiry &#8594;</button>
     </div>
   </div>
 
@@ -387,27 +350,22 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8
   </footer>
 </div>
 
-<!-- ABOUT — fully redesigned -->
+<!-- ABOUT -->
 <div class="page" id="page-about">
-
   <div class="about-hero">
-    <!-- Using confirmed-working architecture image -->
     <img src="https://lh3.googleusercontent.com/d/1F43O3aZ-L5Tegr1VU383VH7mFbwpHiR7" alt="Forma XIII">
     <div class="about-hero-overlay"></div>
     <div class="about-hero-content">
       <div class="about-hero-eyebrow">Est. 2020 — Cairo</div>
-      <!-- NEW HEADLINE — philosophical, about form -->
       <h1 class="about-hero-title">Form is not<br>what a thing <em>looks like.</em><br>It is what a thing<br><em>asks of you.</em></h1>
     </div>
   </div>
-
   <div class="about-quote">
     <div class="about-quote-inner">
       <div class="about-quote-text">&#8220;The finest spaces are not made. They are <em>revealed</em> — stripped of everything that does not belong, until what remains could not have been otherwise.&#8221;</div>
       <div class="about-quote-attr">Forma XIII — Studio Principle</div>
     </div>
   </div>
-
   <div class="about-philosophy reveal">
     <div class="ap-left">
       <p class="sl">Our Belief</p>
@@ -420,10 +378,8 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8
       <p class="ap-body">Forma XIII was founded in Cairo in 2020, at a moment when the world had paused and space itself had become a subject of urgent conversation. We asked: what does it mean to be at home? What does a room owe the person inside it?<br><br>Our studio operates across architecture and interior design, residential and commercial, with work in Cairo, the Gulf, and the Levant. We are small by intention — eight people who have chosen depth over scale, and who believe that the relationship between a studio and its clients is one of the most intimate collaborations a person can enter into.<br><br>Every project begins with a long conversation. We visit the site alone, before we bring drawings. We try to understand not just what a client wants to build, but what they want to feel. Then, and only then, do we begin.</p>
     </div>
   </div>
-
   <div class="about-values reveal">
-    <p class="sl">What We Stand For</p>
-    <h2 class="st">Our <em>Values.</em></h2>
+    <p class="sl">What We Stand For</p><h2 class="st">Our <em>Values.</em></h2>
     <div class="val-grid">
       <div class="val"><div class="val-n">01</div><div class="val-t">Precision</div><p class="val-d">Every decision is deliberate. We work slowly, thoroughly, and without compromise on what matters.</p></div>
       <div class="val"><div class="val-n">02</div><div class="val-t">Honesty</div><p class="val-d">We use materials for what they are — never to simulate something they are not.</p></div>
@@ -433,7 +389,6 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8
       <div class="val"><div class="val-n">06</div><div class="val-t">Craft</div><p class="val-d">We work only with makers who share our standards, ensuring every detail is resolved in the making.</p></div>
     </div>
   </div>
-
   <footer>
     <div><div class="f-logo-txt">FORMA XIII</div><div class="f-logo-sub">F-XIII</div></div>
     <p class="f-copy">&#169; 2025 Forma XIII. All rights reserved.</p>
@@ -449,20 +404,19 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:var(--b);padding:1.8
       <h1 class="c-st">Start a<br><em>Conversation.</em></h1>
       <p class="c-body">Every project begins with a conversation. Tell us about your vision and we will tell you how we can bring it into being.</p>
       <div class="ci-lbl">Studio — Cairo</div><div class="ci-val">90 Street, New Cairo, Egypt</div>
-      <div class="ci-lbl">Email</div><div class="ci-val">hello@formaxiii.com</div>
-      <div class="ci-lbl">Phone</div><div class="ci-val">+20 2 1234 5678</div>
+      <div class="ci-lbl">Email</div><div class="ci-val">info@forma-xiii.com</div>
     </div>
     <div>
       <div class="fg2">
-        <div><label class="fl">First Name</label><input class="fi" type="text" placeholder="Alessandro"></div>
-        <div><label class="fl">Last Name</label><input class="fi" type="text" placeholder="Rossi"></div>
+        <div><label class="fl">First Name</label><input class="fi" type="text" id="cp-fn" placeholder="Alessandro"></div>
+        <div><label class="fl">Last Name</label><input class="fi" type="text" id="cp-ln" placeholder="Rossi"></div>
       </div>
-      <label class="fl">Email</label><input class="fi" type="email" placeholder="hello@yourdomain.com">
-      <label class="fl">Project Type</label><input class="fi" type="text" placeholder="Residential / Architecture / Commercial">
-      <label class="fl">Budget Range</label><input class="fi" type="text" placeholder="e.g. k &#8211; M">
+      <label class="fl">Email</label><input class="fi" type="email" id="cp-email" placeholder="hello@yourdomain.com">
+      <label class="fl">Project Type</label><input class="fi" type="text" id="cp-type" placeholder="Residential / Architecture / Commercial">
+      <label class="fl">Budget Range</label><input class="fi" type="text" id="cp-budget" placeholder="e.g. k – M">
       <label class="fl">Your Vision</label>
-      <textarea class="fta" placeholder="Tell us about your project &#8212; location, scale, timeline&#8230;"></textarea>
-      <button class="sbtn" style="margin-top:1.4rem">Send Enquiry &#8594;</button>
+      <textarea class="fta" id="cp-msg" placeholder="Tell us about your project — location, scale, timeline&#8230;"></textarea>
+      <button class="sbtn" style="margin-top:1.4rem" onclick="sendEnquiry('cp')">Send Enquiry &#8594;</button>
     </div>
   </div>
   <footer>
@@ -503,6 +457,7 @@ var RES = [
   {name:'Villa Nour',sub:'Cairo, Egypt · 2024',images:['1jGhKrrzPbBzxpWIaEErk5QLMmsjaIU2a','1XEmjLTJ4oCD8lxkAPqOTu7np3vnEv1PB','1J8u-phSNiORzgRY-MR4CUJ8u3hdIGIVC','1TkNRGhWd9JI3l3gV01EEjpvct5hcxoZJ','1qIAmICbqTMMbUNsM2Prmv13oaUVsCitt']},
   {name:'The White Diwan',sub:'New Cairo, Egypt · 2022',images:['1FrF1o414KY0RKdUUlmTecG6j4goh4i4i','1uvtKYeEsdyfZa9nhS8kcgmJ86Vr6FT6-','19Mpc9OyOnEkHzOLi8P2KzmH63-HCcwSP','1bhq5O_Dgfihibh3bsNvHA3mNehbgL_vm','1SvfHZLX3CK20f6JzmpdkhhwJn19bb7r4']}
 ];
+
 var COM = [
   {name:'Atelier Blanc',sub:'Cairo, Egypt · 2023',images:['1_VVrxRVSs4g4jfRkxbK-AauRiQGtz_QW','18nhRi0HkGsNPznCBWIxtl9DzavO7gPbl','1coY5CSZ4zdt-Z1nj37RbZrsp0ZXWARHv','10GpLvRZbQP73amzU3THjtXSGbmRgTh3s','1yTjU-eedlCXJHMEtzuULdgo12m-CjdDH']},
   {name:'The Merchant Office',sub:'Beirut, Lebanon · 2021',images:['13dD4L1qjIFRcDVD_PK6eWEes8k73vBMN','1g79jWWgqESogdq_JM8rOkP7J13FjPTVH','1EQFH7z0aPJFPKl1_DwXL3SdA_NVkDJgL','1baQinwnAhnPnAe5VuundT9ZeEIJ47a7s','1UsOBQgPzL77juOXYrFba0iQ4nCnzK0gC']},
@@ -510,9 +465,12 @@ var COM = [
   {name:'Studio Kohl',sub:'Dubai, UAE · 2023',images:['145US3SGTFwqb4J_qH0uLovnKvwrNIPmT','1GX4EzU8c1HA8G2YYljuqvt6WiP_HxEbR','1seBvD0tQ9LQNWpuTXfjZiAF1Isp1T5vP','1npQgTI-lud51tYoD1LPaDIapNVST1wk2','1HBd4lbm4NDIX-LtYktwZ328eTlRNBrz8']},
   {name:'The Pale Library',sub:'New Cairo, Egypt · 2024',images:['1XMYcEZvKs9zzq4RO-JbBPYiVs_kuDfwi','18bnp6VS9IhzTIynOijXeh-d7wupMyotU','10QpAz1iV-ZDGYJm1as6j-INs-GUxsONf','1NAxpxHafZ3cr0G4GrxMa1hPNQ_8MVQWe','16WWjyjJmVFQ6yy2oTrP0QaYbNzj4lAug']}
 ];
+
 var ARCH = [
-  {name:'The Threshold Tower',sub:'Cairo, Egypt · 2023',images:['1vbnnaxcp8z_z0AGthAGJc_BarHjgzLY7','1F43O3aZ-L5Tegr1VU383VH7mFbwpHiR7','1mH2HfTXfzQ35Z6drRyAqo6CnrktD0wy-','15FyLiR189aIQc7lR0_qI58iuRKu6dIvE','1sBUPU8PedeWdVN-oLKodqgKiAHu9S3dj']},
-  {name:'House of Horizons',sub:'Dubai, UAE · 2022',images:['14tvDK9_g-oBpHXnaV_XCx3o-3L-MqbM_','13HGzdoyVtkMoxSmEp-Edmdw8TAYzzNp7','1gZVwHIWbgW1zOS3iYqnogsWj_srUq-A0','15AJXXLBSEl9NKyFwp_l3k2t_3F9TEV8b','1nzTwsgG7CgoPx1ugXrwIkfxtROdXC7Sg']},
+  /* renamed: private villa */
+  {name:'Villa Silentia',sub:'Cairo, Egypt · 2023',images:['1vbnnaxcp8z_z0AGthAGJc_BarHjgzLY7','1F43O3aZ-L5Tegr1VU383VH7mFbwpHiR7','1mH2HfTXfzQ35Z6drRyAqo6CnrktD0wy-','15FyLiR189aIQc7lR0_qI58iuRKu6dIvE','1sBUPU8PedeWdVN-oLKodqgKiAHu9S3dj']},
+  /* renamed: art gallery */
+  {name:'Maison des Arts',sub:'Dubai, UAE · 2022',images:['14tvDK9_g-oBpHXnaV_XCx3o-3L-MqbM_','13HGzdoyVtkMoxSmEp-Edmdw8TAYzzNp7','1gZVwHIWbgW1zOS3iYqnogsWj_srUq-A0','15AJXXLBSEl9NKyFwp_l3k2t_3F9TEV8b','1nzTwsgG7CgoPx1ugXrwIkfxtROdXC7Sg']},
   {name:'The Cliff Pavilion',sub:'Cairo, Egypt · 2023',images:['1ICf0W7tZl_lKgecotkXi3xJSeA9KpvBg','1RWH7ciIVnUtejrhA4ReRvqIRNTO3jaD6','1-9OZUYBzr5gK2fRFxwjeyLFwJ5eZap0Z','1A_NyvX3j12n68OrrvWdCCBXKOSRNuTLm','142mzc5cXTEBiDuVgF5cBSIIfLFneFWtJ']},
   {name:'Desert Gate',sub:'Cairo, Egypt · 2024',images:['1k3bvgTuNxFstZchxwKgEB6haZ9Uhp3Be','17FKb8f_corgzjmqZBroJA2GPEHLtnBD2','1V7t-hseWsCIAvIFV_tv-1Xt2-1sbAM2p','10mZmnjjuJr-d8I9_Gl7uEhvn0TAiyEdD','1NDMaktrPJahsXwKr7Dk_im5NfMcKoDKk']},
   {name:'The Archive',sub:'Beirut, Lebanon · 2021',images:['1XKtsw9ehEnQnxIxT7vs3TGwmF1lFrXEC','1IS-Lslk7Fo-A7QSLH_UiH5WOyO_de6Fe','1uzNEU2FemvkxayyBLcFs0QrCKrl_gI06','1-ssbVEoUzWUyLevCRa75ce15DlfnyI1g','1Z5dniCCjjhm8GLk_Sbnqv0w2n2FvQfgp']},
@@ -535,6 +493,23 @@ function buildGrid(id, data) {
   for (var j = 0; j < cards.length; j++) {
     (function(proj){ cards[j].addEventListener('click', function(){ openLb(proj); }); })(data[j]);
   }
+}
+
+/* SEND ENQUIRY — opens mailto with form content */
+function sendEnquiry(prefix) {
+  var fn = document.getElementById(prefix+'-fn') ? document.getElementById(prefix+'-fn').value : '';
+  var ln = document.getElementById(prefix+'-ln') ? document.getElementById(prefix+'-ln').value : '';
+  var email = document.getElementById(prefix+'-email') ? document.getElementById(prefix+'-email').value : '';
+  var type = document.getElementById(prefix+'-type') ? document.getElementById(prefix+'-type').value : '';
+  var budget = document.getElementById(prefix+'-budget') ? document.getElementById(prefix+'-budget').value : '';
+  var msg = document.getElementById(prefix+'-msg') ? document.getElementById(prefix+'-msg').value : '';
+  var subject = 'New Enquiry from ' + fn + ' ' + ln;
+  var body = 'Name: ' + fn + ' ' + ln + '\n' +
+             'Email: ' + email + '\n' +
+             'Project Type: ' + type + '\n' +
+             (budget ? 'Budget: ' + budget + '\n' : '') +
+             '\nMessage:\n' + msg;
+  window.location.href = 'mailto:info@forma-xiii.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 }
 
 var slideIdx = 0;
